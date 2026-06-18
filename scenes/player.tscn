@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://qgqmnv1rhqal"]
+
+[ext_resource type="Script" uid="uid://bkf45vmrr781h" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://b5so2lg7rwf3c" path="res://assets/playerFRENTE48.png" id="2_dqkch"]
+[ext_resource type="Texture2D" uid="uid://bis7yx22fgr" path="res://assets/spritePlayer.png" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://biqp7y5jamoln" path="res://assets/playerCOSTAS48.png" id="3_dqkch"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
+size = Vector2(32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
+radius = 23.021729
+
+[node name="player" type="CharacterBody2D" unique_id=2106504485]
+collision_mask = 2
+script = ExtResource("1_g2els")
+sprite_frente = ExtResource("2_dqkch")
+sprite_costas = ExtResource("3_dqkch")
+sprite_esquerda = ExtResource("2_qhqgy")
+sprite_direita = ExtResource("2_qhqgy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2052292592]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=901694242]
+shape = SubResource("RectangleShape2D_dqkch")
+
+[node name="timerProjectile" type="Timer" parent="." unique_id=1271753440]
+autostart = true
+
+[node name="zonaDano" type="Area2D" parent="." unique_id=1866412453]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="zonaDano" unique_id=1814714662]
+shape = SubResource("CircleShape2D_tuyoq")
+
+[connection signal="timeout" from="timerProjectile" to="." method="_on_timer_projectile_timeout"]
+[connection signal="body_entered" from="zonaDano" to="." method="_on_zona_dano_body_entered"]

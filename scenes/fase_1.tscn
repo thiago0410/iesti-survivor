@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://cmyv4gp6mjedy"]
+
+[ext_resource type="Script" uid="uid://do8htjrtp4ieb" path="res://scripts/fase_1.gd" id="1_u5pyp"]
+[ext_resource type="Texture2D" uid="uid://o7gstwob1sh6" path="res://assets/blackBackground.png" id="2_ktbmo"]
+[ext_resource type="PackedScene" uid="uid://361g8qhpqekt" path="res://scenes/edminion.tscn" id="2_u7fro"]
+[ext_resource type="PackedScene" uid="uid://qgqmnv1rhqal" path="res://scenes/player.tscn" id="3_ktbmo"]
+[ext_resource type="Script" uid="uid://bpm7cacer64r6" path="res://scripts/game_manager.gd" id="5_fh0dc"]
+[ext_resource type="Texture2D" uid="uid://bupg3hfh6bo4v" path="res://assets/playerESQUERDA.png" id="5_m44rk"]
+[ext_resource type="Script" uid="uid://d4lq045pmlnkd" path="res://scripts/spawner_inimigos.gd" id="6_6cnnc"]
+[ext_resource type="Texture2D" uid="uid://7xhys37owv4w" path="res://assets/playerDIREITA.png" id="6_fbhx4"]
+[ext_resource type="Script" uid="uid://dhsfiuflhln72" path="res://scripts/ui.gd" id="7_6cnnc"]
+
+[node name="fase1" type="Node2D" unique_id=521004707]
+script = ExtResource("1_u5pyp")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1009825600]
+scale = Vector2(1.111111, 1.1080247)
+texture = ExtResource("2_ktbmo")
+centered = false
+
+[node name="edminion" parent="." unique_id=286244246 instance=ExtResource("2_u7fro")]
+position = Vector2(99, 290)
+
+[node name="player" parent="." unique_id=2106504485 instance=ExtResource("3_ktbmo")]
+position = Vector2(143, 291)
+sprite_esquerda = ExtResource("5_m44rk")
+sprite_direita = ExtResource("6_fbhx4")
+
+[node name="gameManager" type="Node" parent="." unique_id=644149950]
+script = ExtResource("5_fh0dc")
+
+[node name="spawnerInimigos" type="Node2D" parent="." unique_id=764845582]
+script = ExtResource("6_6cnnc")
+
+[node name="spawnTimer" type="Timer" parent="spawnerInimigos" unique_id=1977093506]
+wait_time = 2.0
+autostart = true
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=761671717]
+process_mode = 3
+script = ExtResource("7_6cnnc")
+
+[node name="HUD" type="Control" parent="UI" unique_id=682790229]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BarraVida" type="ProgressBar" parent="UI/HUD" unique_id=398174881]
+layout_mode = 1
+offset_left = 17.0
+offset_top = 2.0
+offset_right = 21.0
+offset_bottom = 29.0
+
+[node name="TextoScore" type="Label" parent="UI/HUD" unique_id=1114802009]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1.0
+offset_bottom = 23.0
+grow_horizontal = 0
+
+[node name="TextoNivel" type="Label" parent="UI/HUD" unique_id=1720961822]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="TelaFimJogo" type="Control" parent="UI" unique_id=2022728320]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI/TelaFimJogo" unique_id=123625808]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextoMensagem" type="Label" parent="UI/TelaFimJogo" unique_id=1984885368]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="timeout" from="spawnerInimigos/spawnTimer" to="spawnerInimigos" method="_on_spawn_timer_timeout"]

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://361g8qhpqekt"]
+
+[ext_resource type="Script" uid="uid://co0jkp06brje1" path="res://scripts/edminion.gd" id="1_hi5rs"]
+[ext_resource type="Texture2D" uid="uid://b33ruexoh582o" path="res://assets/spriteEdminion.png" id="2_vohxk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wq34"]
+size = Vector2(32, 32)
+
+[node name="edminion" type="CharacterBody2D" unique_id=286244246]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_hi5rs")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=412125188]
+texture = ExtResource("2_vohxk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=265783498]
+shape = SubResource("RectangleShape2D_4wq34")
