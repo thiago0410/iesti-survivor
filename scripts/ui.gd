@@ -30,3 +30,6 @@ func mostrar_fim_de_jogo(mensagem: String, cor: Color):
 	tela_fim_jogo.visible = true
 	texto_mensagem.text = mensagem
 	texto_mensagem.modulate = cor # Altera a cor do texto (ex: vermelho para derrota, verde para vitória)
+
+
+#teste
