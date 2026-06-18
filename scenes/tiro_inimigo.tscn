@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://do6xu2uwf0xnd"]
+
+[ext_resource type="Script" uid="uid://cp6ha0ny0u5aw" path="res://scripts/tiro_inimigo.gd" id="1_mp504"]
+[ext_resource type="Texture2D" uid="uid://tnpklajsg8sn" path="res://assets/projectile.png" id="2_odl2a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mp504"]
+size = Vector2(32, 32)
+
+[node name="tiroInimigo" type="Area2D" unique_id=470788428]
+collision_layer = 4
+script = ExtResource("1_mp504")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1635320475]
+texture = ExtResource("2_odl2a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=417456445]
+shape = SubResource("RectangleShape2D_mp504")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

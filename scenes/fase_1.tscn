@@ -54,6 +54,7 @@ offset_left = 17.0
 offset_top = 2.0
 offset_right = 21.0
 offset_bottom = 29.0
+show_percentage = false
 
 [node name="TextoScore" type="Label" parent="UI/HUD" unique_id=1114802009]
 layout_mode = 1

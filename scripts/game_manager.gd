@@ -4,8 +4,8 @@ var score: int = 0
 var nivel_atual: int = 1
 
 # Definição de pontos necessários para passar de nível (Fase 1 -> 2 -> 3)
-const PONTOS_PARA_NIVEL_2 = 3
-const PONTOS_PARA_NIVEL_3 = 5
+const PONTOS_PARA_NIVEL_2 = 2
+const PONTOS_PARA_NIVEL_3 = 3
 
 # Referência ao Spawner para mudar a dificuldade
 @onready var spawner = $"../spawnerInimigos"
@@ -16,6 +16,7 @@ func adicionar_score(quantidade: int):
 	
 	# Atualiza o score na tela
 	var ui = get_tree().current_scene.get_node_or_null("UI")
+	
 	if ui:
 		ui.atualizar_score(score)
 		

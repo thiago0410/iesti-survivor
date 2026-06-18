@@ -10,11 +10,27 @@ extends CanvasLayer
 @onready var texto_mensagem = $TelaFimJogo/TextoMensagem
 
 func _ready():
-	# Configura o estado inicial visual
-	atualizar_vida(5)
-	atualizar_score(0)
-	atualizar_nivel(1)
+	# Força a interface a começar limpa e oculta a tela de fim de jogo
 	tela_fim_jogo.visible = false
+	
+	# Busca os nós reais da fase para capturar os dados iniciais exatos
+	var gm = get_tree().current_scene.get_node_or_null("GameManager")
+	var jogador = get_tree().current_scene.get_node_or_null("player")
+	
+	# Se encontrar o jogador, define o tamanho máximo da barra de vida e o valor atual
+	if jogador:
+		barra_vida.max_value = jogador.vida_maxima
+		atualizar_vida(jogador.vida_atual)
+	else:
+		atualizar_vida(5)
+		
+	# Se encontrar o GameManager, pega os pontos iniciais (0) e nível (1)
+	if gm:
+		atualizar_score(gm.score)
+		atualizar_nivel(gm.nivel_atual)
+	else:
+		atualizar_score(0)
+		atualizar_nivel(1)
 
 func atualizar_vida(nova_vida: int):
 	barra_vida.value = nova_vida

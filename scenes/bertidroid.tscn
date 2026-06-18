@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bna7u8v33gge0"]
+
+[ext_resource type="Script" uid="uid://d2umqodj1x1te" path="res://scripts/bertidroid.gd" id="1_1wshk"]
+[ext_resource type="Texture2D" uid="uid://bis7yx22fgr" path="res://assets/spritePlayer.png" id="2_jciqf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_glgpi"]
+size = Vector2(32, 32)
+
+[node name="bertidroid" type="CharacterBody2D" unique_id=594659221]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_1wshk")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1968305125]
+texture = ExtResource("2_jciqf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=725826160]
+shape = SubResource("RectangleShape2D_glgpi")
+
+[node name="ataqueTimer" type="Timer" parent="." unique_id=74974772]
+wait_time = 3.0
+autostart = true
+
+[node name="rastroMira" type="Line2D" parent="." unique_id=54340851]
+width = 1.0
+default_color = Color(1, 0, 0, 0.5882353)
+
+[connection signal="timeout" from="ataqueTimer" to="." method="_on_ataque_timer_timeout"]

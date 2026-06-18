@@ -1,14 +1,17 @@
 extends Node2D
 
 # Carrega a cena do Minion para podermos cloná-lo
-var cena_inimigo = preload("res://scenes/edminion.tscn")
-
+var cena_minion = preload("res://scenes/edminion.tscn")
+var cena_atirador = preload("res://scenes/bertidroid.tscn")
 @onready var player = $"../player" # Referência ao jogador na fase
 @onready var timer = $spawnTimer
 
 # Variáveis para controle de dificuldade progressiva
 var tempo_decorrido: float = 0.0
 var modificador_tempo: float = 1.0
+
+
+var inimigo_atual = cena_minion
 
 func _process(delta):
 	# Dificuldade Temporal: Aumenta o modificador conforme o tempo passa
@@ -20,12 +23,16 @@ func _process(delta):
 func _on_spawn_timer_timeout():
 	if player == null: return
 	
-	# Instancia o inimigo
-	var inimigo = cena_inimigo.instantiate()
+	var tipo_escolhido = inimigo_atual
+	
+	var inimigo = tipo_escolhido.instantiate()
+	if inimigo_atual == cena_atirador and randf() > 0.6:
+		# 60% minion comum, 40% atirador para misturar a horda
+		tipo_escolhido = cena_minion
 	
 	# Faz o inimigo nascer em um círculo ao redor do jogador (fora da visão da tela)
 	var angulo_aleatorio = randf() * PI * 2
-	var raio_spawn = 1000 # Distância segura para não brotar na cara do jogador
+	var raio_spawn = 800 # Distância segura para não brotar na cara do jogador
 	var vetor_spawn = Vector2(cos(angulo_aleatorio), sin(angulo_aleatorio)) * raio_spawn
 	
 	inimigo.global_position = player.global_position + vetor_spawn
@@ -41,6 +48,7 @@ func atualizar_dificuldade(nivel: int):
 	if nivel == 2:
 		print("Dificuldade aumentada: Fase 2!")
 		timer.wait_time = 1.0 # Spawna muito mais rápido
+		inimigo_atual = cena_atirador
 		# Aqui na Fase 2 você poderá carregar o segundo tipo de inimigo depois!
 	elif nivel == 3:
 		print("Dificuldade máxima: Fase 3!")
