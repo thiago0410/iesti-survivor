@@ -8,5 +8,5 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if body.has_method("receber_dano"):
-		body.receber_dano(1) # Causa 1 de dano no player
+		body.receber_dano(2) # Causa 1 de dano no player
 		queue_free()
