@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://exh2u42aj26h"]
+
+[ext_resource type="Script" uid="uid://bfqvipp1tdnfd" path="res://scripts/magia_area.gd" id="1_6aejk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hyrss"]
+radius = 45.0
+
+[sub_resource type="Gradient" id="Gradient_6aejk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6aejk"]
+radius = 45.0
+
+[node name="MagiaArea" type="Area2D" unique_id=2083895813]
+collision_layer = 0
+script = ExtResource("1_6aejk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2040127775]
+shape = SubResource("CircleShape2D_hyrss")
+
+[node name="VisualExplosao" type="Sprite2D" parent="." unique_id=563182635]
+
+[node name="EfeitoExplosao" type="CPUParticles2D" parent="." unique_id=1874022306]
+emitting = false
+amount = 50
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 250.0
+color = Color(1, 0, 0, 1)
+color_ramp = SubResource("Gradient_6aejk")
+
+[node name="ParedeInimigos" type="StaticBody2D" parent="." unique_id=2048943180]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParedeInimigos" unique_id=1997764738]
+shape = SubResource("CircleShape2D_6aejk")

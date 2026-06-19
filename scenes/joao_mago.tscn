@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://br2jbk1ag68yk"]
+
+[ext_resource type="Script" uid="uid://7nhikpdlbiup" path="res://scripts/joao_mago.gd" id="1_kse0i"]
+[ext_resource type="Texture2D" uid="uid://db2qo0pkhwjku" path="res://assets/spriteJoaoMago.png" id="2_7b5sh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w6i3x"]
+size = Vector2(32, 32)
+
+[node name="JoaoMago" type="CharacterBody2D" unique_id=2024054569]
+script = ExtResource("1_kse0i")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=955678594]
+texture = ExtResource("2_7b5sh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1910110529]
+shape = SubResource("RectangleShape2D_w6i3x")
+
+[node name="MagoTimer" type="Timer" parent="." unique_id=1351575338]
+wait_time = 4.0
+autostart = true
+
+[connection signal="timeout" from="MagoTimer" to="." method="_on_mago_timer_timeout"]

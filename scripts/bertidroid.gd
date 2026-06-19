@@ -4,7 +4,7 @@ const SPEED = 70.0 # Um pouco mais lento que o minion básico
 const DISTANCIA_PARADA = 300.0 # Distância em pixels onde ele para para mirar
 
 var jogador_alvo: Node2D = null
-var vida_maxima: int = 4 # Um pouco mais resistente que o minion
+var vida_maxima: int = 2 # Um pouco mais resistente que o minion
 var vida_atual: int = vida_maxima
 
 var cena_tiro = preload("res://scenes/tiro_inimigo.tscn")
@@ -77,7 +77,7 @@ func receber_dano(quantidade: float):
 		morrer()
 
 func morrer():
-	var game_manager = get_tree().current_scene.get_node_or_null("GameManager")
+	var game_manager = get_tree().current_scene.get_node_or_null("gameManager")
 	if game_manager:
 		game_manager.adicionar_score(2) # Atiradores dão mais pontos (2)
 	queue_free()
