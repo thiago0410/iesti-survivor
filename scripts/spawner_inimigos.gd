@@ -1,55 +1,52 @@
 extends Node2D
 
-# Carrega a cena do Minion para podermos cloná-lo
 var cena_minion = preload("res://scenes/edminion.tscn")
 var cena_atirador = preload("res://scenes/bertidroid.tscn")
-@onready var player = $"../player" # Referência ao jogador na fase
-@onready var timer = $spawnTimer
-
-# Variáveis para controle de dificuldade progressiva
-var tempo_decorrido: float = 0.0
-var modificador_tempo: float = 1.0
-
 
 var inimigo_atual = cena_minion
 
-func _process(delta):
-	# Dificuldade Temporal: Aumenta o modificador conforme o tempo passa
-	tempo_decorrido += delta
-	# A cada 30 segundos, diminui o tempo de espera do timer ligeiramente
-	if timer.wait_time > 0.5:
-		timer.wait_time = max(0.5, 2.0 - (tempo_decorrido * 0.01))
+@onready var player = $"../player"
+@onready var timer = $spawnTimer
+
+func _ready():
+	# 🟢 CALIBRAÇÃO INICIAL (NÍVEL 1)
+	# Começa gerando 1 inimigo a cada 3.0 segundos (ritmo calmo para começar)
+	timer.wait_time = 5.0
+
+func _process(_delta):
+	# 🔴 REMOVEMOS A ACELERAÇÃO INFINITA DAQUI!
+	# Deixar o _process vazio ou apagá-lo impede que o jogo saia de controle sozinho.
+	pass
 
 func _on_spawn_timer_timeout():
 	if player == null: return
 	
 	var tipo_escolhido = inimigo_atual
 	
-	var inimigo = tipo_escolhido.instantiate()
-	if inimigo_atual == cena_atirador and randf() > 0.6:
-		# 60% minion comum, 40% atirador para misturar a horda
+	# Se estiver nas fases com atirador, mistura para não sobrecarregar
+	if inimigo_atual == cena_atirador and randf() > 0.4:
+		# 60% de chance de ser minion comum, 40% de ser atirador
 		tipo_escolhido = cena_minion
+		
+	var inimigo = tipo_escolhido.instantiate()
 	
-	# Faz o inimigo nascer em um círculo ao redor do jogador (fora da visão da tela)
 	var angulo_aleatorio = randf() * PI * 2
-	var raio_spawn = 800 # Distância segura para não brotar na cara do jogador
+	var raio_spawn = 500
 	var vetor_spawn = Vector2(cos(angulo_aleatorio), sin(angulo_aleatorio)) * raio_spawn
 	
 	inimigo.global_position = player.global_position + vetor_spawn
-	
-	# Diz ao inimigo quem perseguir
 	inimigo.definir_alvo(player)
-	
-	# Adiciona o inimigo na fase
 	get_tree().current_scene.add_child(inimigo)
 
-# Função chamada pelo GameManager quando o nível sobe
+# 🎯 CONTROLE RÍGIDO DE DIFICULDADE POR NÍVEL
+# Agora os valores são fixos e testados para o jogador conseguir respirar!
 func atualizar_dificuldade(nivel: int):
 	if nivel == 2:
 		print("Dificuldade aumentada: Fase 2!")
-		timer.wait_time = 1.0 # Spawna muito mais rápido
+		# No nível 2, os inimigos surgem a cada 1.8 segundos e entra o atirador
+		timer.wait_time = 1.8
 		inimigo_atual = cena_atirador
-		# Aqui na Fase 2 você poderá carregar o segundo tipo de inimigo depois!
 	elif nivel == 3:
 		print("Dificuldade máxima: Fase 3!")
-		timer.wait_time = 0.5 # Spawna o dobro de rápido
+		# No nível 3 (ritmo final), surge 1 monstro a cada 1.0 segundo
+		timer.wait_time = 1.0

@@ -7,7 +7,7 @@ var jogador_alvo: Node2D = null
 var vida_maxima: int = 4 # Um pouco mais resistente que o minion
 var vida_atual: int = vida_maxima
 
-var cena_tiro = preload("res://scenes/bertidroid.tscn")
+var cena_tiro = preload("res://scenes/tiro_inimigo.tscn")
 var esta_mirando: bool = false
 
 @onready var timer_ataque = $AtaqueTimer
@@ -30,11 +30,26 @@ func _physics_process(_delta):
 		velocity = Vector2.ZERO # Pára para focar no tiro
 		
 	# Atualiza o rastro de mira em tempo real se estiver no período de preparação
-	if esta_mirando:
+	if esta_mirando and rastro_mira != null:
 		rastro_mira.clear_points()
 		rastro_mira.add_point(Vector2.ZERO) # Ponto inicial: o centro do inimigo
-		# Ponto final: a posição local do jogador em relação ao inimigo
-		rastro_mira.add_point(to_local(jogador_alvo.global_position))
+		
+		# --- AJUSTE DA BORDA DA COLISÃO ---
+		# 1. Descobre a distância em linha reta do inimigo até o jogador
+		var vetor_para_jogador = to_local(jogador_alvo.global_position)
+		var distancia_total = vetor_para_jogador.length()
+		
+		# 2. Defina o raio da colisão do seu personagem (em pixels)
+		# Se a sua colisão circular tiver, por exemplo, 16 pixels de raio, coloque 16.0
+		var raio_colisao_player = 23.0 
+		
+		# 3. Calcula a nova distância parando na borda
+		var distancia_ajustada = max(0.0, distancia_total - raio_colisao_player)
+		
+		# 4. Cria o ponto final usando a mesma direção, mas com a distância reduzida
+		var ponto_final = vetor_para_jogador.normalized() * distancia_ajustada
+		
+		rastro_mira.add_point(ponto_final)
 
 func _on_ataque_timer_timeout():
 	if !jogador_alvo: return

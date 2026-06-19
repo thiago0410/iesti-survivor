@@ -17,12 +17,13 @@ texture = ExtResource("2_jciqf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=725826160]
 shape = SubResource("RectangleShape2D_glgpi")
 
-[node name="ataqueTimer" type="Timer" parent="." unique_id=74974772]
+[node name="AtaqueTimer" type="Timer" parent="." unique_id=74974772]
 wait_time = 3.0
 autostart = true
 
-[node name="rastroMira" type="Line2D" parent="." unique_id=54340851]
-width = 1.0
-default_color = Color(1, 0, 0, 0.5882353)
+[node name="RastroMira" type="Line2D" parent="." unique_id=54340851]
+width = 7.0
+default_color = Color(0.8627451, 0.35686275, 0, 0.5882353)
+texture_mode = 1
 
-[connection signal="timeout" from="ataqueTimer" to="." method="_on_ataque_timer_timeout"]
+[connection signal="timeout" from="AtaqueTimer" to="." method="_on_ataque_timer_timeout"]

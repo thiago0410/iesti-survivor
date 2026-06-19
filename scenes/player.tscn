@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://bis7yx22fgr" path="res://assets/spritePlayer.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://biqp7y5jamoln" path="res://assets/playerCOSTAS48.png" id="3_dqkch"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
-size = Vector2(32, 32)
+[sub_resource type="CircleShape2D" id="CircleShape2D_dqkch"]
+radius = 23.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
 radius = 23.021729
@@ -22,7 +22,7 @@ sprite_direita = ExtResource("2_qhqgy")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2052292592]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=901694242]
-shape = SubResource("RectangleShape2D_dqkch")
+shape = SubResource("CircleShape2D_dqkch")
 
 [node name="timerProjectile" type="Timer" parent="." unique_id=1271753440]
 autostart = true
