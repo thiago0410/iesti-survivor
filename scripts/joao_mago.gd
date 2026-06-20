@@ -28,13 +28,13 @@ func _on_mago_timer_timeout():
 	# Adiciona a magia diretamente no cenário da fase principal
 	get_tree().current_scene.add_child(magia)
 
-func receber_dano(quantidade: float):
+func receber_dano(quantidade: int):
 	vida_atual -= quantidade
 	if vida_atual <= 0:
 		morrer()
 
 func morrer():
-	var game_manager = get_tree().current_scene.get_node_or_null("gameManager")
+	var game_manager = get_tree().current_scene.get_node_or_null("gameMmanager")
 	if game_manager:
 		game_manager.adicionar_score(3) # Chefes dão 3 pontos!
 	queue_free()

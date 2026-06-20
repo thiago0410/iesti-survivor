@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bkf45vmrr781h" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://b5so2lg7rwf3c" path="res://assets/playerFRENTE48.png" id="2_dqkch"]
-[ext_resource type="Texture2D" uid="uid://bis7yx22fgr" path="res://assets/spritePlayer.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://biqp7y5jamoln" path="res://assets/playerCOSTAS48.png" id="3_dqkch"]
+[ext_resource type="Texture2D" uid="uid://bupg3hfh6bo4v" path="res://assets/playerESQUERDA.png" id="4_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://7xhys37owv4w" path="res://assets/playerDIREITA.png" id="5_tuyoq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dqkch"]
 radius = 23.0
@@ -16,8 +17,8 @@ collision_mask = 2
 script = ExtResource("1_g2els")
 sprite_frente = ExtResource("2_dqkch")
 sprite_costas = ExtResource("3_dqkch")
-sprite_esquerda = ExtResource("2_qhqgy")
-sprite_direita = ExtResource("2_qhqgy")
+sprite_esquerda = ExtResource("4_qlg0r")
+sprite_direita = ExtResource("5_tuyoq")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2052292592]
 
