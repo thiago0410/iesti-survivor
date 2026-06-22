@@ -12,6 +12,7 @@ var esta_mirando: bool = false
 
 @onready var timer_ataque = $AtaqueTimer
 @onready var rastro_mira = $RastroMira
+@onready var sprite = $Sprite2D
 
 func definir_alvo(alvo):
 	jogador_alvo = alvo
@@ -28,6 +29,11 @@ func _physics_process(_delta):
 		move_and_slide()
 	else:
 		velocity = Vector2.ZERO # Pára para focar no tiro
+		
+	if jogador_alvo.global_position.x < global_position.x:
+		sprite.flip_h = true
+	else:
+		sprite.flip_h = false
 		
 	# Atualiza o rastro de mira em tempo real se estiver no período de preparação
 	if esta_mirando and rastro_mira != null:

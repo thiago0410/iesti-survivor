@@ -4,9 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://o7gstwob1sh6" path="res://assets/blackBackground.png" id="2_ktbmo"]
 [ext_resource type="PackedScene" uid="uid://qgqmnv1rhqal" path="res://scenes/player.tscn" id="3_ktbmo"]
 [ext_resource type="Script" uid="uid://bpm7cacer64r6" path="res://scripts/game_manager.gd" id="5_fh0dc"]
-[ext_resource type="Texture2D" uid="uid://bupg3hfh6bo4v" path="res://assets/playerESQUERDA.png" id="5_m44rk"]
 [ext_resource type="Script" uid="uid://d4lq045pmlnkd" path="res://scripts/spawner_inimigos.gd" id="6_6cnnc"]
-[ext_resource type="Texture2D" uid="uid://7xhys37owv4w" path="res://assets/playerDIREITA.png" id="6_fbhx4"]
 [ext_resource type="Script" uid="uid://dhsfiuflhln72" path="res://scripts/ui.gd" id="7_6cnnc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5tko"]
@@ -27,6 +25,47 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fh0dc"]
+bg_color = Color(0.6, 0.6, 0.6, 0.78431374)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8666667, 0.7176471, 0.13333334, 0.78431374)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6cnnc"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0.105882354, 0.2, 0.93333334, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbhx4"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(2.9841065e-06, 0, 0.72456545, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_clhhq"]
+content_margin_left = 15.0
+content_margin_top = 8.0
+content_margin_right = 15.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0.48235294, 0.95686275, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
 [node name="fase1" type="Node2D" unique_id=521004707]
 script = ExtResource("1_u5pyp")
 
@@ -37,11 +76,10 @@ centered = false
 
 [node name="player" parent="." unique_id=2106504485 instance=ExtResource("3_ktbmo")]
 position = Vector2(143, 291)
-sprite_esquerda = ExtResource("5_m44rk")
-sprite_direita = ExtResource("6_fbhx4")
 
 [node name="gameManager" type="Node" parent="." unique_id=644149950]
 script = ExtResource("5_fh0dc")
+PONTOS_PARA_VENCER_JOGO = 4
 
 [node name="spawnerInimigos" type="Node2D" parent="." unique_id=764845582]
 script = ExtResource("6_6cnnc")
@@ -107,6 +145,7 @@ offset_bottom = 23.0
 grow_horizontal = 2
 
 [node name="TelaFimJogo" type="Control" parent="UI" unique_id=2022728320]
+process_mode = 3
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -122,6 +161,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(1, 1, 1, 0.09803922)
 
 [node name="TextoMensagem" type="Label" parent="UI/TelaFimJogo" unique_id=1984885368]
 layout_mode = 1
@@ -136,5 +176,42 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="QuadroResultado" type="PanelContainer" parent="UI/TelaFimJogo" unique_id=728160275]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -31.0
+offset_right = 20.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fh0dc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/TelaFimJogo/QuadroResultado" unique_id=965674779]
+layout_mode = 2
+
+[node name="TextoMensagem" type="Label" parent="UI/TelaFimJogo/QuadroResultado/VBoxContainer" unique_id=251325755]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextoScoreFinal" type="Label" parent="UI/TelaFimJogo/QuadroResultado/VBoxContainer" unique_id=876753811]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotaoReiniciar" type="Button" parent="UI/TelaFimJogo/QuadroResultado/VBoxContainer" unique_id=1706400681]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_6cnnc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fbhx4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_clhhq")
+text = "JOGAR NOVAMENTE"
 
 [connection signal="timeout" from="spawnerInimigos/spawnTimer" to="spawnerInimigos" method="_on_spawn_timer_timeout"]

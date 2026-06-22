@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var sprite = $Sprite2D
+
 const SPEED = 50.0 # Magos andam mais devagar de forma imponente
 var jogador_alvo: Node2D = null
 var vida_maxima: int = 1
@@ -17,6 +19,11 @@ func _physics_process(_delta):
 	var direcao = global_position.direction_to(jogador_alvo.global_position)
 	velocity = direcao * SPEED
 	move_and_slide()
+	
+	if jogador_alvo.global_position.x < global_position.x:
+		sprite.flip_h = true
+	else:
+		sprite.flip_h = false
 
 func _on_mago_timer_timeout():
 	if !jogador_alvo: return
