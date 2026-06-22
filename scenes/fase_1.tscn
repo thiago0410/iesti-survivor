@@ -79,7 +79,7 @@ position = Vector2(143, 291)
 
 [node name="gameManager" type="Node" parent="." unique_id=644149950]
 script = ExtResource("5_fh0dc")
-PONTOS_PARA_VENCER_JOGO = 4
+PONTOS_PARA_VENCER_JOGO = 10
 
 [node name="spawnerInimigos" type="Node2D" parent="." unique_id=764845582]
 script = ExtResource("6_6cnnc")
@@ -133,6 +133,7 @@ anchor_right = 1.0
 offset_left = -1.0
 offset_bottom = 23.0
 grow_horizontal = 0
+theme_override_font_sizes/font_size = 16
 
 [node name="TextoNivel" type="Label" parent="UI/HUD" unique_id=1720961822]
 layout_mode = 1
@@ -143,6 +144,21 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+
+[node name="TextoTimerTiro" type="Label" parent="UI/HUD" unique_id=2024563636]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -19.0
+offset_top = 41.0
+offset_right = 21.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 0.1882353, 1)
+theme_override_font_sizes/font_size = 16
 
 [node name="TelaFimJogo" type="Control" parent="UI" unique_id=2022728320]
 process_mode = 3

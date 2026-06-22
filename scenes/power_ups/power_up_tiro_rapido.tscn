@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://gcirwiq1qxej"]
+
+[ext_resource type="PackedScene" uid="uid://bav1t6a5hu7b6" path="res://scenes/power_ups/power_up_base.tscn" id="1_pgte8"]
+[ext_resource type="Script" uid="uid://drxotwbppxqtl" path="res://scripts/power_ups/power_up_tiro_rapido.gd" id="2_wwmis"]
+[ext_resource type="Texture2D" uid="uid://dy7elcx3mfsfp" path="res://assets/powerUpTiro.png" id="3_cjej8"]
+
+[node name="PowerUpTiroRapido" unique_id=348128868 instance=ExtResource("1_pgte8")]
+script = ExtResource("2_wwmis")
+duracao_efeito = 6.0
+multiplicador_cadencia = 0.5
+
+[node name="Sprite2D" parent="." index="0" unique_id=412908063]
+texture = ExtResource("3_cjej8")

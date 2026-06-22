@@ -72,3 +72,13 @@ func mostrar_fim_de_jogo(mensagem: String, cor: Color):
 func _on_botao_reiniciar_pressed():
 	get_tree().paused = false # IMPORTANTE: Retira a pausa, senão o jogo recomeça congelado!
 	get_tree().reload_current_scene() # Recarrega a Fase 1 do zero de forma limpa
+
+
+func atualizar_timer_powerup(segundos_restantes: float):
+	var label_timer = get_node_or_null("%TextoTimerTiro")
+	if label_timer:
+		if segundos_restantes > 0.0:
+			# .f indica que queremos apenas 1 casa decimal (ex: 4.2s em vez de 4.23849s)
+			label_timer.text = "Tiro Rápido: %.1fs" % segundos_restantes
+		else:
+			label_timer.text = "" # Apaga o texto quando o bônus acabar

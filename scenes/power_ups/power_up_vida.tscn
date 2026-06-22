@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cof6qgv3v0ex7"]
+
+[ext_resource type="PackedScene" uid="uid://bav1t6a5hu7b6" path="res://scenes/power_ups/power_up_base.tscn" id="1_urebr"]
+[ext_resource type="Script" uid="uid://bmnt7nuobr21n" path="res://scripts/power_ups/power_up_vida.gd" id="2_oplg5"]
+[ext_resource type="Texture2D" uid="uid://cfnby3py2k2ih" path="res://assets/powerUp.png" id="3_dkm78"]
+
+[node name="PowerUpVida" unique_id=348128868 instance=ExtResource("1_urebr")]
+script = ExtResource("2_oplg5")
+quantidade_cura = 1
+
+[node name="Sprite2D" parent="." index="0" unique_id=412908063]
+texture = ExtResource("3_dkm78")

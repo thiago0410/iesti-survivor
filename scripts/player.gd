@@ -4,6 +4,10 @@ extends CharacterBody2D
 const SPEED = 200.0
 var cena_projectile = preload("res://scenes/projectile.tscn")
 
+var cadencia_tiro_original: float = 0.3 # Guarde o tempo padrão do seu timer de tiro [cite: 6]
+@onready var timer_tiro = $TimerTiro # Referência ao seu timer de disparo existente [cite: 6]
+@onready var timer_boost_tiro = Timer.new() # Cria um timer de duração do efeito [cite: 6]
+
 # --- VARIÁVEIS PARA OS SPRITES ---
 # O @export faz com que essas variáveis apareçam no painel Inspetor do Godot
 @export var sprite_frente: Texture2D   # Visão de frente (olhando para baixo)
@@ -16,6 +20,54 @@ var cena_projectile = preload("res://scenes/projectile.tscn")
 
 var vida_maxima : int = 5
 var vida_atual : int = vida_maxima
+
+# Coloque logo abaixo das suas variáveis lá no topo:
+func _ready():
+	# Configura o timer de duração do boost
+	add_child(timer_boost_tiro)
+	timer_boost_tiro.one_shot = true
+	timer_boost_tiro.timeout.connect(_on_boost_tiro_timeout)
+	
+	# Salva a cadência original para podermos resetar depois
+	if timer_tiro:
+		cadencia_tiro_original = timer_tiro.wait_time
+
+func coletar_power_up():
+	pass
+
+func curar_vida(quantidade: int):
+	vida_atual += quantidade
+	# Impede que a vida passe do máximo (5 / 5)
+	vida_atual = clamp(vida_atual, 0, vida_maxima)
+	print("Vida curada! Atual: ", vida_atual)
+	
+	# Avisa a UI para atualizar a barra verde
+	var ui = get_tree().current_scene.get_node_or_null("UI")
+	if ui:
+		ui.atualizar_vida(vida_atual)
+
+func ativar_boost_tiro(duracao: float, multiplicador: float):
+	print("Ativando tiro rápido!")
+	
+	# Se o timer de tiro não existir, não faz nada [cite: 6]
+	if !timer_tiro: return
+	
+	# Aplica o multiplicador (ex: de 0.3s vira 0.15s) [cite: 6]
+	timer_tiro.wait_time = 0.08
+	
+	# Inicia/reinicia a contagem de duração do efeito [cite: 6]
+	timer_boost_tiro.start(duracao)
+
+func _on_boost_tiro_timeout():
+	print("Fim do tiro rápido.")
+	
+	# Reseta o tempo de disparo ao original [cite: 6]
+	if timer_tiro:
+		timer_tiro.wait_time = cadencia_tiro_original
+		
+	var ui = get_tree().current_scene.get_node_or_null("UI")
+	if ui:
+		ui.atualizar_timer_powerup(0.0)
 
 func _physics_process(_delta):
 	# Captura as teclas WASD ou setas do teclado[cite: 2]
@@ -30,6 +82,12 @@ func _physics_process(_delta):
 	# 🛑 TRAVA DO PERSONAGEM NA TELA:
 	# Definimos uma margem de segurança (ex: 32 pixels) para o sprite não ficar metade para fora
 	var margem = 32.0
+	
+	# Se o timer do bônus estiver rodando, manda o tempo restante para a tela
+	if timer_boost_tiro and timer_boost_tiro.time_left > 0.0:
+		var ui = get_tree().current_scene.get_node_or_null("UI")
+		if ui:
+			ui.atualizar_timer_powerup(timer_boost_tiro.time_left)
 	
 	# O clamp limita o valor da posição entre o mínimo (margem) e o máximo (tamanho da tela menos a margem)
 	global_position.x = clamp(global_position.x, margem, 1280.0 - margem)

@@ -23,7 +23,6 @@ sprite_direita = ExtResource("5_tuyoq")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2052292592]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=901694242]
-position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_qlg0r")
 
 [node name="timerProjectile" type="Timer" parent="." unique_id=1271753440]
