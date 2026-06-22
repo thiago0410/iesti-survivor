@@ -6,11 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://bupg3hfh6bo4v" path="res://assets/playerESQUERDA.png" id="4_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://7xhys37owv4w" path="res://assets/playerDIREITA.png" id="5_tuyoq"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dqkch"]
-radius = 23.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
+size = Vector2(42, 42)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
-radius = 23.021729
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tuyoq"]
+size = Vector2(48, 48)
 
 [node name="player" type="CharacterBody2D" unique_id=2106504485]
 collision_mask = 2
@@ -23,7 +23,8 @@ sprite_direita = ExtResource("5_tuyoq")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2052292592]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=901694242]
-shape = SubResource("CircleShape2D_dqkch")
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_qlg0r")
 
 [node name="timerProjectile" type="Timer" parent="." unique_id=1271753440]
 autostart = true
@@ -32,7 +33,7 @@ autostart = true
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="zonaDano" unique_id=1814714662]
-shape = SubResource("CircleShape2D_tuyoq")
+shape = SubResource("RectangleShape2D_tuyoq")
 
 [connection signal="timeout" from="timerProjectile" to="." method="_on_timer_projectile_timeout"]
 [connection signal="body_entered" from="zonaDano" to="." method="_on_zona_dano_body_entered"]
