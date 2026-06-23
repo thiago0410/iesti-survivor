@@ -28,7 +28,8 @@ func _physics_process(_delta):
 		velocity = direcao * SPEED
 		move_and_slide()
 	else:
-		velocity = Vector2.ZERO # Pára para focar no tiro
+		velocity = Vector2.ZERO 
+		# Pára para focar no tiro [cite: 3]
 		
 	if jogador_alvo.global_position.x < global_position.x:
 		sprite.flip_h = true
@@ -46,10 +47,9 @@ func _physics_process(_delta):
 		var distancia_total = vetor_para_jogador.length()
 		
 		# 2. Defina o raio da colisão do seu personagem (em pixels)
-		# Se a sua colisão circular tiver, por exemplo, 16 pixels de raio, coloque 16.0
 		var raio_colisao_player = 23.0 
 		
-		# 3. Calcula a nova distância parando na borda
+		# 3. Calcula a nova distância parando na borda [cite: 4]
 		var distancia_ajustada = max(0.0, distancia_total - raio_colisao_player)
 		
 		# 4. Cria o ponto final usando a mesma direção, mas com a distância reduzida
@@ -67,14 +67,19 @@ func _on_ataque_timer_timeout():
 	await get_tree().create_timer(1.0).timeout
 	
 	# Apaga o rastro logo antes do disparo
-	rastro_mira.clear_points()
+	if rastro_mira != null:
+		rastro_mira.clear_points()
 	esta_mirando = false
 	
-	# Dispara o projétil de fato se o jogador ainda estiver vivo
+	# Dispara o projétil de fato se o jogador ainda estiver vivo 
 	if jogador_alvo:
 		var tiro = cena_tiro.instantiate()
-		tiro.global_position = global_position
+		
+		# 🟢 ATUALIZADO: Definimos a direção primeiro!
 		tiro.direction = global_position.direction_to(jogador_alvo.global_position)
+		
+		# Em seguida, definimos a posição e jogamos na cena
+		tiro.global_position = global_position
 		get_tree().current_scene.add_child(tiro)
 
 func receber_dano(quantidade: float):
@@ -83,7 +88,10 @@ func receber_dano(quantidade: float):
 		morrer()
 
 func morrer():
-	var game_manager = get_tree().current_scene.get_node_or_null("gameManager")
+	var game_manager = get_tree().current_scene.get_node_or_null("GameManager")
+	if not game_manager:
+		game_manager = get_tree().current_scene.get_node_or_null("gameManager")
+		
 	if game_manager:
-		game_manager.adicionar_score(2) # Atiradores dão mais pontos (2)
+		game_manager.adicionar_score(2) # Atiradores dão mais pontos (2) 
 	queue_free()

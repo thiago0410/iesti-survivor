@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://pbx6fljcark8" path="res://scripts/power_ups/power_up_base.gd" id="1_cvj6h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8tnd"]
-size = Vector2(16, 16)
+size = Vector2(32, 32)
 
 [node name="PowerUpBase" type="Area2D" unique_id=348128868]
 collision_layer = 0

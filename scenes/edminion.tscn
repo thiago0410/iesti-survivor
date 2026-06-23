@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://361g8qhpqekt"]
 
 [ext_resource type="Script" uid="uid://co0jkp06brje1" path="res://scripts/edminion.gd" id="1_hi5rs"]
-[ext_resource type="Texture2D" uid="uid://df4qhpbaqiw08" path="res://assets/ediminion.png" id="2_hi5rs"]
+[ext_resource type="Texture2D" uid="uid://bj2tbspilqx85" path="res://assets/ediminionFinal.png" id="2_hi5rs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4wq34"]
-size = Vector2(44, 57)
+size = Vector2(60, 60)
 
 [node name="edminion" type="CharacterBody2D" unique_id=286244246]
 collision_layer = 2

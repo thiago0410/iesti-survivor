@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cmyv4gp6mjedy"]
 
 [ext_resource type="Script" uid="uid://do8htjrtp4ieb" path="res://scripts/fase_1.gd" id="1_u5pyp"]
-[ext_resource type="Texture2D" uid="uid://o7gstwob1sh6" path="res://assets/blackBackground.png" id="2_ktbmo"]
+[ext_resource type="Texture2D" uid="uid://de2jroht3nt2t" path="res://assets/backgroundGrass.png" id="2_fh0dc"]
 [ext_resource type="PackedScene" uid="uid://qgqmnv1rhqal" path="res://scenes/player.tscn" id="3_ktbmo"]
 [ext_resource type="Script" uid="uid://bpm7cacer64r6" path="res://scripts/game_manager.gd" id="5_fh0dc"]
 [ext_resource type="Script" uid="uid://d4lq045pmlnkd" path="res://scripts/spawner_inimigos.gd" id="6_6cnnc"]
@@ -70,8 +70,9 @@ corner_radius_bottom_left = 6
 script = ExtResource("1_u5pyp")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1009825600]
+position = Vector2(-45, -57.000008)
 scale = Vector2(1.111111, 1.1080247)
-texture = ExtResource("2_ktbmo")
+texture = ExtResource("2_fh0dc")
 centered = false
 
 [node name="player" parent="." unique_id=2106504485 instance=ExtResource("3_ktbmo")]
@@ -133,6 +134,7 @@ anchor_right = 1.0
 offset_left = -1.0
 offset_bottom = 23.0
 grow_horizontal = 0
+theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
 theme_override_font_sizes/font_size = 16
 
 [node name="TextoNivel" type="Label" parent="UI/HUD" unique_id=1720961822]

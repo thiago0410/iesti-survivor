@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bav1t6a5hu7b6" path="res://scenes/power_ups/power_up_base.tscn" id="1_urebr"]
 [ext_resource type="Script" uid="uid://bmnt7nuobr21n" path="res://scripts/power_ups/power_up_vida.gd" id="2_oplg5"]
-[ext_resource type="Texture2D" uid="uid://cfnby3py2k2ih" path="res://assets/powerUp.png" id="3_dkm78"]
+[ext_resource type="Texture2D" uid="uid://uyqowt3gqrwq" path="res://assets/powerUpVida.png" id="3_dkm78"]
 
 [node name="PowerUpVida" unique_id=348128868 instance=ExtResource("1_urebr")]
 script = ExtResource("2_oplg5")
