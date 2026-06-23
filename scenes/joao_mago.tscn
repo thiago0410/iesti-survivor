@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://br2jbk1ag68yk"]
 
 [ext_resource type="Script" uid="uid://7nhikpdlbiup" path="res://scripts/joao_mago.gd" id="1_kse0i"]
-[ext_resource type="Texture2D" uid="uid://db2qo0pkhwjku" path="res://assets/spriteJoaoMago.png" id="2_7b5sh"]
+[ext_resource type="Texture2D" uid="uid://byvmbm245qwqe" path="res://assets/joaoMago.png" id="2_7b5sh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w6i3x"]
-size = Vector2(32, 32)
+size = Vector2(53, 64)
 
 [node name="JoaoMago" type="CharacterBody2D" unique_id=2024054569]
 collision_layer = 2
