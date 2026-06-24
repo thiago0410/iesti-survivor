@@ -41,7 +41,10 @@ func receber_dano(quantidade: int):
 		morrer()
 
 func morrer():
-	var game_manager = get_tree().current_scene.get_node_or_null("gameMmanager")
+	var game_manager = get_tree().current_scene.get_node_or_null("gameManager")
+	if not game_manager:
+		game_manager = get_tree().current_scene.get_node_or_null("gameManager")
+		
 	if game_manager:
-		game_manager.adicionar_score(3) # Chefes dão 3 pontos!
+		game_manager.adicionar_score(3)  
 	queue_free()

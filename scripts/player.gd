@@ -5,7 +5,7 @@ const SPEED = 200.0
 var cena_projectile = preload("res://scenes/projectile.tscn")
 
 var cadencia_tiro_original: float = 0.3 # Guarde o tempo padrão do seu timer de tiro [cite: 6]
-@onready var timer_tiro = $TimerTiro # Referência ao seu timer de disparo existente [cite: 6]
+@onready var timer_tiro = $TextoTimerTiro # Referência ao seu timer de disparo existente [cite: 6]
 @onready var timer_boost_tiro = Timer.new() # Cria um timer de duração do efeito [cite: 6]
 
 # --- VARIÁVEIS PARA OS SPRITES ---

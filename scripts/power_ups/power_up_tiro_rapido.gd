@@ -1,7 +1,7 @@
 extends PowerUpBase # 🟢 Estende da base
 
 # Configurações do efeito temporário
-@export var duracao_efeito: float = 6.0 # 6 segundos de tiro rápido
+@export var duracao_efeito: float = 5.0 # 6 segundos de tiro rápido
 @export var multiplicador_cadencia: float = 0.5 # Corta o tempo de espera pela metade (0.5x)
 
 func aplicar_efeito(player):

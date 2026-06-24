@@ -26,7 +26,7 @@ func _physics_process(_delta):
 		else:
 			sprite.flip_h = false
 		
-func receber_dano(quantidade: float):
+func receber_dano(quantidade: int):
 	vida_atual -= quantidade
 	print("Vida restante edminion: ", vida_atual)
 	if vida_atual <= 0:
@@ -34,7 +34,7 @@ func receber_dano(quantidade: float):
 			
 # 🟢 FUNÇÃO DE MORTE ATUALIZADA COM SISTEMA DE DROP PROGRESSIVO
 func morrer():
-	var game_manager = get_tree().current_scene.get_node_or_null("GameManager")
+	var game_manager = get_tree().current_scene.get_node_or_null("gameManager")
 	if not game_manager:
 		game_manager = get_tree().current_scene.get_node_or_null("gameManager")
 		

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bav1t6a5hu7b6"]
 
 [ext_resource type="Script" uid="uid://pbx6fljcark8" path="res://scripts/power_ups/power_up_base.gd" id="1_cvj6h"]
-[ext_resource type="AudioStream" path="res://assets/somColeta.mp3" id="2_tfbbu"]
+[ext_resource type="AudioStream" uid="uid://cgdp5jrf0sip8" path="res://assets/somColeta.mp3" id="2_tfbbu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8tnd"]
 size = Vector2(32, 32)

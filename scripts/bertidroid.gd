@@ -83,13 +83,13 @@ func _on_ataque_timer_timeout():
 		get_tree().current_scene.add_child(tiro)
 		$SomTiro.play()
 
-func receber_dano(quantidade: float):
+func receber_dano(quantidade: int):
 	vida_atual -= quantidade
 	if vida_atual <= 0:
 		morrer()
 
 func morrer():
-	var game_manager = get_tree().current_scene.get_node_or_null("GameManager")
+	var game_manager = get_tree().current_scene.get_node_or_null("gameManager")
 	if not game_manager:
 		game_manager = get_tree().current_scene.get_node_or_null("gameManager")
 		
