@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-signal tempo_powerup_alterado(segundos: float)
-
 # Velocidade de movimento em pixels por segundo
 const SPEED = 200.0
 var cena_projectile = preload("res://scenes/projectile.tscn")
@@ -51,41 +49,51 @@ func curar_vida(quantidade: int):
 func ativar_boost_tiro(duracao: float, multiplicador: float):
 	print("Ativando tiro rápido!")
 	
+	# Se o timer de tiro não existir, não faz nada [cite: 6]
 	if !timer_tiro: return
 	
+	# Aplica o multiplicador (ex: de 0.3s vira 0.15s) [cite: 6]
 	timer_tiro.wait_time = 0.08
-	timer_boost_tiro.start(duracao)
 	
-	# 🟢 TESTE FORÇADO: Manda um texto fixo para a UI na hora que pega o item
-	# para checar se o nó aparece fisicamente na tela!
-	var ui = get_tree().current_scene.get_node_or_null("UI")
-	if ui:
-		ui.atualizar_timer_powerup(duracao)
+	# Inicia/reinicia a contagem de duração do efeito [cite: 6]
+	timer_boost_tiro.start(duracao)
 
 func _on_boost_tiro_timeout():
 	print("Fim do tiro rápido.")
 	
+	# Reseta o tempo de disparo ao original [cite: 6]
 	if timer_tiro:
 		timer_tiro.wait_time = cadencia_tiro_original
 		
-	# 🟢 ATUALIZADO: Emite o sinal com 0 para apagar o texto da tela
-	tempo_powerup_alterado.emit(0.0)
+	var ui = get_tree().current_scene.get_node_or_null("UI")
+	if ui:
+		ui.atualizar_timer_powerup(0.0)
 
 func _physics_process(_delta):
-	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	velocity = direction * SPEED
-	move_and_slide()
+	# Captura as teclas WASD ou setas do teclado[cite: 2]
+	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") #[cite: 2]
 	
+	# Aplica a direção à velocidade[cite: 2]
+	velocity = direction * SPEED #[cite: 2]
+	
+	# Função embutida do CharacterBody2D para aplicar o movimento[cite: 2]
+	move_and_slide() #[cite: 2]
+	
+	# 🛑 TRAVA DO PERSONAGEM NA TELA:
+	# Definimos uma margem de segurança (ex: 32 pixels) para o sprite não ficar metade para fora
 	var margem = 32.0
 	
-	# 🟢 ATUALIZADO: Emite o sinal com o tempo restante a cada frame
+	# Se o timer do bônus estiver rodando, manda o tempo restante para a tela
 	if timer_boost_tiro and timer_boost_tiro.time_left > 0.0:
-		tempo_powerup_alterado.emit(timer_boost_tiro.time_left)
+		var ui = get_tree().current_scene.get_node_or_null("UI")
+		if ui:
+			ui.atualizar_timer_powerup(timer_boost_tiro.time_left)
 	
+	# O clamp limita o valor da posição entre o mínimo (margem) e o máximo (tamanho da tela menos a margem)
 	global_position.x = clamp(global_position.x, margem, 1280.0 - margem)
 	global_position.y = clamp(global_position.y, margem, 720.0 - margem)
 	
-	atualizar_direcao_olhar()
+	atualizar_direcao_olhar() 
 
 func atualizar_direcao_olhar():
 	# Calcula o vetor que aponta do jogador até o mouse
