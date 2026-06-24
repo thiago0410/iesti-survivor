@@ -38,6 +38,10 @@ func _ready():
 	else:
 		atualizar_score(0) 
 		atualizar_nivel(1) 
+		
+	if jogador:
+		# Conecta o sinal do player diretamente à função que atualiza o texto na UI
+		jogador.tempo_powerup_alterado.connect(atualizar_timer_powerup)
 
 func atualizar_vida(nova_vida: int):
 	var vida_segura = max(0, nova_vida)
