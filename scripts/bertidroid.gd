@@ -81,6 +81,7 @@ func _on_ataque_timer_timeout():
 		# Em seguida, definimos a posição e jogamos na cena
 		tiro.global_position = global_position
 		get_tree().current_scene.add_child(tiro)
+		$SomTiro.play()
 
 func receber_dano(quantidade: float):
 	vida_atual -= quantidade

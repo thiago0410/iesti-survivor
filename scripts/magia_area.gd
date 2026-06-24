@@ -52,6 +52,9 @@ func realizar_ataque():
 	if visual_explosao:
 		visual_explosao.visible = true
 		
+	if has_node("SomExplosao"):
+		$SomExplosao.play()
+		
 	# Ativa a colisão de dano. Qualquer corpo dentro da área disparará o sinal instantaneamente!
 	colisao.disabled = false
 	

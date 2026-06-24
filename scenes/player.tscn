@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://biqp7y5jamoln" path="res://assets/playerCOSTAS48.png" id="3_dqkch"]
 [ext_resource type="Texture2D" uid="uid://bupg3hfh6bo4v" path="res://assets/playerESQUERDA.png" id="4_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://7xhys37owv4w" path="res://assets/playerDIREITA.png" id="5_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://divxejvm7hs5n" path="res://assets/projetil.mp3" id="6_tuyoq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
 size = Vector2(42, 42)
@@ -33,6 +34,10 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="zonaDano" unique_id=1814714662]
 shape = SubResource("RectangleShape2D_tuyoq")
+
+[node name="SomTiro" type="AudioStreamPlayer2D" parent="." unique_id=393104406]
+stream = ExtResource("6_tuyoq")
+volume_db = -20.0
 
 [connection signal="timeout" from="timerProjectile" to="." method="_on_timer_projectile_timeout"]
 [connection signal="body_entered" from="zonaDano" to="." method="_on_zona_dano_body_entered"]

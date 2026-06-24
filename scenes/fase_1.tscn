@@ -4,8 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://budqiwo5l7dah" path="res://assets/grama.png" id="2_fh0dc"]
 [ext_resource type="PackedScene" uid="uid://qgqmnv1rhqal" path="res://scenes/player.tscn" id="3_ktbmo"]
 [ext_resource type="Script" uid="uid://bpm7cacer64r6" path="res://scripts/game_manager.gd" id="5_fh0dc"]
+[ext_resource type="AudioStream" uid="uid://ic5hyyjtenyc" path="res://assets/levelUp.mp3" id="5_o5tko"]
 [ext_resource type="Script" uid="uid://d4lq045pmlnkd" path="res://scripts/spawner_inimigos.gd" id="6_6cnnc"]
 [ext_resource type="Script" uid="uid://dhsfiuflhln72" path="res://scripts/ui.gd" id="7_6cnnc"]
+[ext_resource type="AudioStream" uid="uid://b7jtyi3wnrr4x" path="res://assets/musica.mp3" id="7_o5tko"]
+[ext_resource type="AudioStream" uid="uid://qdqwgwd42lf1" path="res://assets/gameWin.mp3" id="8_fbhx4"]
+[ext_resource type="AudioStream" uid="uid://b35sirm7jlu4a" path="res://assets/gameOver.mp3" id="9_clhhq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5tko"]
 border_width_left = 2
@@ -82,6 +86,10 @@ position = Vector2(143, 291)
 script = ExtResource("5_fh0dc")
 PONTOS_PARA_VENCER_JOGO = 10
 
+[node name="SomLevelUp" type="AudioStreamPlayer" parent="gameManager" unique_id=1328595685]
+stream = ExtResource("5_o5tko")
+volume_db = -5.0
+
 [node name="spawnerInimigos" type="Node2D" parent="." unique_id=764845582]
 script = ExtResource("6_6cnnc")
 
@@ -157,9 +165,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -19.0
-offset_top = 41.0
+offset_top = 31.0
 offset_right = 21.0
-offset_bottom = 64.0
+offset_bottom = 54.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 1, 0.1882353, 1)
 theme_override_font_sizes/font_size = 16
@@ -233,5 +241,18 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6cnnc")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_fbhx4")
 theme_override_styles/hover = SubResource("StyleBoxFlat_clhhq")
 text = "JOGAR NOVAMENTE"
+
+[node name="MusicaVitoria" type="AudioStreamPlayer" parent="UI" unique_id=1266544010]
+process_mode = 3
+stream = ExtResource("8_fbhx4")
+
+[node name="MusicaDerrota" type="AudioStreamPlayer" parent="UI" unique_id=2055456508]
+process_mode = 3
+stream = ExtResource("9_clhhq")
+
+[node name="MusicaFundo" type="AudioStreamPlayer" parent="." unique_id=672370491]
+stream = ExtResource("7_o5tko")
+volume_db = -15.0
+autoplay = true
 
 [connection signal="timeout" from="spawnerInimigos/spawnTimer" to="spawnerInimigos" method="_on_spawn_timer_timeout"]

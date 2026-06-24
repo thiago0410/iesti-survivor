@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d2umqodj1x1te" path="res://scripts/bertidroid.gd" id="1_1wshk"]
 [ext_resource type="Texture2D" uid="uid://cnyh70qyc3et7" path="res://assets/bertidroid-1.png" id="2_1wshk"]
+[ext_resource type="AudioStream" uid="uid://b5fthik1d5j23" path="res://assets/projetilBertidroid.mp3" id="3_jciqf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_glgpi"]
 size = Vector2(60, 60)
@@ -25,5 +26,9 @@ autostart = true
 width = 7.0
 default_color = Color(0.174532, 0.59398866, 0.6753548, 0.5882353)
 texture_mode = 1
+
+[node name="SomTiro" type="AudioStreamPlayer2D" parent="." unique_id=673118817]
+stream = ExtResource("3_jciqf")
+volume_db = -10.0
 
 [connection signal="timeout" from="AtaqueTimer" to="." method="_on_ataque_timer_timeout"]

@@ -61,12 +61,19 @@ func mostrar_fim_de_jogo(mensagem: String, cor: Color):
 	texto_mensagem.modulate = cor 
 	
 	# Busca o score final do GameManager para exibir dentro do quadro
-	var gm = get_tree().current_scene.get_node_or_null("GameManager")
+	var gm = get_tree().current_scene.get_node_or_null("gameManager")
 	var pontos_finais = 0
 	if gm:
 		pontos_finais = gm.score
 		
 	texto_score_final.text = "Score Atingido: " + str(pontos_finais)
+	
+	if cor == Color.RED: # Se for vermelho, toca a derrota
+		if has_node("MusicaDerrota"):
+			$MusicaDerrota.play()
+	else: # Se for qualquer outra cor (ex: Color.GREEN), toca a vitória
+		if has_node("MusicaVitoria"):
+			$MusicaVitoria.play()
 
 # 🟢 NOVA FUNÇÃO: Reseta o jogo quando clica em "Jogar Novamente"
 func _on_botao_reiniciar_pressed():

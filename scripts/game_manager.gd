@@ -28,8 +28,12 @@ func checar_progresao_nivel():
 		vencer_jogo()
 	elif nivel_atual == 1 and score >= PONTOS_PARA_NIVEL_2:
 		passar_de_nivel(2)
+		if has_node("SomLevelUp"):
+			$SomLevelUp.play()
 	elif nivel_atual == 2 and score >= PONTOS_PARA_NIVEL_3:
 		passar_de_nivel(3)
+		if has_node("SomLevelUp"):
+			$SomLevelUp.play()
 
 func passar_de_nivel(novo_nivel: int):
 	nivel_atual = novo_nivel

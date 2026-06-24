@@ -142,6 +142,9 @@ func _on_timer_projectile_timeout():
 	# 6. Adiciona o tiro na fase principal
 	get_tree().current_scene.add_child(projectile)
 	
+	if has_node("SomTiro"):
+		$SomTiro.play()
+	
 func receber_dano (quantidade : int):
 	vida_atual -= quantidade
 	print("Vida restante personagem: ", vida_atual)
