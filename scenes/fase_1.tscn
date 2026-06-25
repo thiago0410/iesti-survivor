@@ -84,9 +84,6 @@ position = Vector2(143, 291)
 
 [node name="gameManager" type="Node" parent="." unique_id=644149950]
 script = ExtResource("5_fh0dc")
-PONTOS_PARA_NIVEL_2 = 5
-PONTOS_PARA_NIVEL_3 = 10
-PONTOS_PARA_VENCER_JOGO = 20
 
 [node name="SomLevelUp" type="AudioStreamPlayer" parent="gameManager" unique_id=1328595685]
 stream = ExtResource("5_o5tko")

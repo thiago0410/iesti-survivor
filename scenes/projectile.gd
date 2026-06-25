@@ -5,8 +5,6 @@ var direction = Vector2.RIGHT
 var dano: float = 1.0
 
 func _process(delta):
-	# Se você rotacionou o tiro no player, Vector2.RIGHT.rotated(rotation) 
-	# fará ele andar exatamente para "frente" de onde ele está olhando!
 	position += Vector2.RIGHT.rotated(rotation) * speed * delta
 
 func _on_body_entered(body):
