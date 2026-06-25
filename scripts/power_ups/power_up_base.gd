@@ -10,10 +10,12 @@ var velocidade_flutuacao: float = 4.0
 func _ready():
 	body_entered.connect(_on_body_entered)
 
+# faz com que o drop fique flutuando 
 func _process(delta):
 	tempo_decorrido += delta
 	sprite.position.y = sin(tempo_decorrido * velocidade_flutuacao) * amplitude_flutuacao
 
+# verifica se o jogador tocou no drop e chama a funcao aplicar_efeito dos filhos
 func _on_body_entered(body):
 	if body.has_method("coletar_power_up"):
 		if som_coleta and som_coleta.stream:

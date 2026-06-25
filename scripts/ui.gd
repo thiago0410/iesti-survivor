@@ -27,6 +27,7 @@ func _ready():
 		atualizar_score(0) 
 		atualizar_nivel(1) 
 
+# atualiza a barra de vida
 func atualizar_vida(nova_vida: int):
 	var vida_segura = max(0, nova_vida)
 	barra_vida.value = vida_segura
@@ -34,12 +35,15 @@ func atualizar_vida(nova_vida: int):
 	var max_inteiro = int(barra_vida.max_value)
 	texto_vida_num.text = str(vida_inteira) + " / " + str(max_inteiro)
 
+# atualiza o contador de score
 func atualizar_score(novo_score: int):
 	texto_score.text = "Score: " + str(novo_score) 
 
+# atualiza o contador de nivel
 func atualizar_nivel(novo_nivel: int):
 	texto_nivel.text = "Nível: " + str(novo_nivel) 
 
+# tela de fim de jogo (tanto pra vitoria, quanto pra derrota)
 func mostrar_fim_de_jogo(mensagem: String, cor: Color):
 	tela_fim_jogo.visible = true 
 	texto_mensagem.text = mensagem 
@@ -49,7 +53,6 @@ func mostrar_fim_de_jogo(mensagem: String, cor: Color):
 	if gm:
 		pontos_finais = gm.score
 	texto_score_final.text = "Score Atingido: " + str(pontos_finais)
-	
 	if cor == Color.RED:
 		if has_node("MusicaDerrota"):
 			$MusicaDerrota.play()
@@ -57,10 +60,10 @@ func mostrar_fim_de_jogo(mensagem: String, cor: Color):
 		if has_node("MusicaVitoria"):
 			$MusicaVitoria.play()
 
+# reinicia o jogo do zero
 func _on_botao_reiniciar_pressed():
 	get_tree().paused = false
 	get_tree().reload_current_scene() 
-
 
 func atualizar_timer_powerup(segundos_restantes: float):
 	var label_timer = get_node_or_null("%TextoTimerTiro")

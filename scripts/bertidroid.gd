@@ -27,7 +27,7 @@ func _physics_process(_delta):
 		sprite.flip_h = true
 	else:
 		sprite.flip_h = false
-	if esta_mirando and rastro_mira != null:
+	if esta_mirando and rastro_mira != null: #cria um rastro de onde sera disparado o projetil
 		rastro_mira.clear_points()
 		rastro_mira.add_point(Vector2.ZERO)
 		var vetor_para_jogador = to_local(jogador_alvo.global_position)
@@ -37,6 +37,7 @@ func _physics_process(_delta):
 		var ponto_final = vetor_para_jogador.normalized() * distancia_ajustada
 		rastro_mira.add_point(ponto_final)
 
+# dispara o projetil 
 func _on_ataque_timer_timeout():
 	if !jogador_alvo: return
 	esta_mirando = true

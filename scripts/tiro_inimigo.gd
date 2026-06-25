@@ -3,6 +3,7 @@ extends Area2D
 var speed: float = 300.0
 var direction: Vector2 = Vector2.ZERO
 
+# le a posicao do jogador e rotaciona o sprite pro angulo correto
 func _ready():
 	if direction != Vector2.ZERO:
 		rotation = direction.angle()

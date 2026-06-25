@@ -8,6 +8,7 @@ var raio_ataque: float = 45.0
 @onready var visual_explosao = $VisualExplosao
 @onready var parede_inimigos_colisao = $ParedeInimigos/CollisionShape2D
 
+# demora 1,2 segundos para ativar a explosão
 func _ready():
 	colisao.disabled = true
 	if visual_explosao:
@@ -22,6 +23,7 @@ func _process(delta):
 	tempo_decorrido += delta
 	queue_redraw()
 
+# desenha a area de explosao
 func _draw():
 	if esta_explodindo: return
 	var progresso = clamp(tempo_decorrido / tempo_aviso, 0.0, 1.0)
@@ -31,6 +33,7 @@ func _draw():
 	draw_circle(Vector2.ZERO, raio_ataque, cor_preenchimento)
 	draw_arc(Vector2.ZERO, raio_ataque, 0, PI * 2, 32, cor_borda, 2.0, true)
 
+# quando o tempo de aviso acaba, ativa a colisao da magia e da dano ao jogador
 func realizar_ataque():
 	esta_explodindo = true
 	queue_redraw()

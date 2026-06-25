@@ -7,6 +7,7 @@ var nivel_atual: int = 1
 @export var PONTOS_PARA_VENCER_JOGO: int = 20
 @onready var spawner = $"../spawnerInimigos"
 
+# recebe e soma os pontos de score ao derrotar o inimigo
 func adicionar_score(quantidade: int):
 	score += quantidade
 	print("Score atual: ", score) 
@@ -15,6 +16,7 @@ func adicionar_score(quantidade: int):
 		ui.atualizar_score(score)
 	checar_progresao_nivel() #
 
+# verifica os requisitos para subir de nivel
 func checar_progresao_nivel():
 	if score >= PONTOS_PARA_VENCER_JOGO:
 		vencer_jogo()
@@ -27,6 +29,7 @@ func checar_progresao_nivel():
 		if has_node("SomLevelUp"):
 			$SomLevelUp.play()
 
+# atualiza o nivel atual
 func passar_de_nivel(novo_nivel: int):
 	nivel_atual = novo_nivel
 	print("Nivel atual", nivel_atual)
@@ -35,7 +38,8 @@ func passar_de_nivel(novo_nivel: int):
 		ui.atualizar_nivel(nivel_atual)
 	if spawner:
 		spawner.atualizar_dificuldade(nivel_atual)
-	
+
+# avisa a UI que o jogador ganhou o jogo
 func vencer_jogo():
 	print("Game win")
 	var ui = get_tree().current_scene.get_node_or_null("UI")

@@ -23,6 +23,7 @@ func _ready():
 func coletar_power_up():
 	pass
 
+# adiciona vida ao personagem
 func curar_vida(quantidade: int):
 	vida_atual += quantidade
 	vida_atual = clamp(vida_atual, 0, vida_maxima)
@@ -32,12 +33,14 @@ func curar_vida(quantidade: int):
 	if ui:
 		ui.atualizar_vida(vida_atual)
 
+# ativa power up de tiro rapido
 func ativar_boost_tiro(duracao: float, multiplicador: float):
 	print("Ativando tiro rápido!")
 	if !timer_tiro: return
-	timer_tiro.wait_time = 0.08
+	timer_tiro.wait_time = 0.08 # diminui o tempo de espera do disparo
 	timer_boost_tiro.start(duracao)
 
+# retorna a cadencia de tiro normal quando o power up acaba
 func _on_boost_tiro_timeout():
 	print("Fim do tiro rápido.")
 	if timer_tiro:
@@ -46,6 +49,7 @@ func _on_boost_tiro_timeout():
 	if ui:
 		ui.atualizar_timer_powerup(0.0)
 
+# movimentacao do personagem
 func _physics_process(_delta):
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") #[cite: 2]
 	velocity = direction * SPEED #[cite: 2]
@@ -59,6 +63,8 @@ func _physics_process(_delta):
 	global_position.y = clamp(global_position.y, margem, 720.0 - margem)
 	atualizar_direcao_olhar() 
 
+# calcula o angulo entre o personagem e o mouse
+# e troca o sprite de acordo com o angulo
 func atualizar_direcao_olhar():
 	var direcao_mouse = global_position.direction_to(get_global_mouse_position())
 	var angulo = direcao_mouse.angle()
@@ -71,7 +77,7 @@ func atualizar_direcao_olhar():
 	else:
 		if sprite_esquerda: sprite_nodo.texture = sprite_esquerda
 
-
+# atira o projetil do personagem
 func _on_timer_projectile_timeout():
 	var projectile = cena_projectile.instantiate()
 	projectile.global_position = global_position
@@ -81,7 +87,8 @@ func _on_timer_projectile_timeout():
 	get_tree().current_scene.add_child(projectile)
 	if has_node("SomTiro"):
 		$SomTiro.play()
-	
+
+# diminui a vida do personagem conforme recebe dano
 func receber_dano (quantidade : int):
 	vida_atual -= quantidade
 	print("Vida restante personagem: ", vida_atual)
@@ -91,6 +98,7 @@ func receber_dano (quantidade : int):
 	if vida_atual <= 0:
 		game_over()
 
+# avisa a UI que o personagem morreu
 func game_over():
 	print("Game Over!")
 	var ui = get_tree().current_scene.get_node_or_null("UI")
@@ -98,6 +106,7 @@ func game_over():
 		ui.mostrar_fim_de_jogo("GAME OVER!\nVocê acumulou DP nesta fase.", Color.RED)
 	get_tree().paused = true
 
+# area de colisao que recebe o dano (contato ou projetil)
 func _on_zona_dano_body_entered(body: Node2D) -> void:
 	if body.name.contains("Inimigo") or body.has_method("definir_alvo"):
 		receber_dano(1)

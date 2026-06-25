@@ -4,9 +4,11 @@ var speed = 400.0
 var direction = Vector2.RIGHT
 var dano: float = 1.0
 
+# atualiza a posicao da bala por frame
 func _process(delta):
 	position += Vector2.RIGHT.rotated(rotation) * speed * delta
 
+# sensor de colisao da bala
 func _on_body_entered(body):
 	if body.has_method("receber_dano"):
 		body.receber_dano(dano)

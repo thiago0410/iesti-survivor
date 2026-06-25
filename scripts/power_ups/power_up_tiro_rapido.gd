@@ -1,8 +1,9 @@
-extends PowerUpBase
+extends PowerUpBase # herda tudo da base
 
 @export var duracao_efeito: float = 5.0
 @export var multiplicador_cadencia: float = 0.5
 
+# aplica o efeito do tiro rapido
 func aplicar_efeito(player):
 	print("Coletou Tiro Rápido!")
 	if player.has_method("ativar_boost_tiro"):

@@ -20,6 +20,7 @@ func _physics_process(_delta):
 	else:
 		sprite.flip_h = false
 
+# recebe a posicao do personagem instacia a magia no local
 func _on_mago_timer_timeout():
 	if !jogador_alvo: return
 	var magia = cena_magia.instantiate()
